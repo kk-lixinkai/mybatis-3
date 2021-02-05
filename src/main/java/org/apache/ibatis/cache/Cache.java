@@ -1,17 +1,17 @@
 /**
- *    Copyright 2009-2020 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2009-2020 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.ibatis.cache;
 
@@ -35,6 +35,8 @@ import java.util.concurrent.locks.ReadWriteLock;
  *   initialize();
  * }
  * </pre>
+ * <p>
+ * 缓存容器接口，这是一个容器，类似HashMap，可以往其中添加各种缓存
  *
  * @author Clinton Begin
  */
@@ -42,21 +44,22 @@ import java.util.concurrent.locks.ReadWriteLock;
 public interface Cache {
 
   /**
-   * @return The identifier of this cache
+   * @return The identifier of this cache 标识
    */
   String getId();
 
   /**
-   * @param key
-   *          Can be any object but usually it is a {@link CacheKey}
-   * @param value
-   *          The result of a select.
+   * 添加指定键的值
+   *
+   * @param key   Can be any object but usually it is a {@link CacheKey}
+   * @param value The result of a select.
    */
   void putObject(Object key, Object value);
 
   /**
-   * @param key
-   *          The key
+   * 获得指定键的值
+   *
+   * @param key The key
    * @return The object stored in the cache.
    */
   Object getObject(Object key);
@@ -70,20 +73,24 @@ public interface Cache {
    * and releases it when the value is back again.
    * This way other threads will wait for the value to be
    * available instead of hitting the database.
+   * <p>
+   * 移除指定键的值
    *
-   *
-   * @param key
-   *          The key
+   * @param key The key
    * @return Not used
    */
   Object removeObject(Object key);
 
   /**
+   * 清空缓存
+   * <p>
    * Clears this cache instance.
    */
   void clear();
 
   /**
+   * 获取容器中缓存的数量
+   * <p>
    * Optional. This method is not called by the core.
    *
    * @return The number of elements stored in the cache (not its capacity).
@@ -91,6 +98,8 @@ public interface Cache {
   int getSize();
 
   /**
+   * 获取读取写锁
+   *
    * Optional. As of 3.2.6 this method is no longer called by the core.
    * <p>
    * Any locking needed by the cache must be provided internally by the cache provider.
