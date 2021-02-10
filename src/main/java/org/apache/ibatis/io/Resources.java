@@ -1,17 +1,17 @@
 /**
- *    Copyright 2009-2020 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2009-2020 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.ibatis.io;
 
@@ -27,16 +27,24 @@ import java.util.Properties;
 
 /**
  * A class to simplify access to resources through the classloader.
+ * <p>
+ * Resources 工具类
  *
  * @author Clinton Begin
  */
 public class Resources {
 
+
+  /**
+   * ClassLoaderWrapper 对象
+   */
   private static ClassLoaderWrapper classLoaderWrapper = new ClassLoaderWrapper();
 
   /**
    * Charset to use when calling getResourceAsReader.
    * null means use the system default.
+   * <p>
+   * 字符集
    */
   private static Charset charset;
 
@@ -58,6 +66,7 @@ public class Resources {
    * @param defaultClassLoader - the new default ClassLoader
    */
   public static void setDefaultClassLoader(ClassLoader defaultClassLoader) {
+    // 修改 ClassLoaderWrapper
     classLoaderWrapper.defaultClassLoader = defaultClassLoader;
   }
 
@@ -125,6 +134,7 @@ public class Resources {
    */
   public static Properties getResourceAsProperties(String resource) throws IOException {
     Properties props = new Properties();
+    // 读取
     try (InputStream in = getResourceAsStream(resource)) {
       props.load(in);
     }
@@ -141,6 +151,7 @@ public class Resources {
    */
   public static Properties getResourceAsProperties(ClassLoader loader, String resource) throws IOException {
     Properties props = new Properties();
+    // 去读
     try (InputStream in = getResourceAsStream(loader, resource)) {
       props.load(in);
     }
@@ -214,6 +225,7 @@ public class Resources {
    */
   public static InputStream getUrlAsStream(String urlString) throws IOException {
     URL url = new URL(urlString);
+    //打开 URLConnection
     URLConnection conn = url.openConnection();
     return conn.getInputStream();
   }
