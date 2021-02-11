@@ -1,17 +1,17 @@
 /**
- *    Copyright 2009-2019 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2009-2019 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.ibatis.logging.slf4j;
 
@@ -30,8 +30,10 @@ public class Slf4jImpl implements Log {
   private Log log;
 
   public Slf4jImpl(String clazz) {
+    // 使用 SLF LoggerFactory 获得 SLF Logger 对象
     Logger logger = LoggerFactory.getLogger(clazz);
 
+    // 如果是 LocationAwareLogger，则创建 Slf4jLocationAwareLoggerImpl 对象
     if (logger instanceof LocationAwareLogger) {
       try {
         // check for slf4j >= 1.6 method signature
@@ -44,6 +46,7 @@ public class Slf4jImpl implements Log {
     }
 
     // Logger is not LocationAwareLogger or slf4j version < 1.6
+    // 否则，创建 Slf4jLoggerImpl 对象
     log = new Slf4jLoggerImpl(logger);
   }
 
